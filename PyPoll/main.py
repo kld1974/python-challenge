@@ -14,8 +14,8 @@ winner = ""
 
 #OPEN FILE
 with open(orig_csv) as csvfile:
+    csv_header = csv.reader(csvfile, delimiter = ',')
     csvreader = csv.DictReader(csvfile)
-    csv_header = next(csvreader)
     #LOOP THRU ROWS
     for row in csvreader:
         votes += 1

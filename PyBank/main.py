@@ -20,29 +20,26 @@ chg_list = []
 avg = 0
 
 #OPEN FILE
-with open(orig_csv) as csvfile:  
+with open(orig_csv) as csvfile:
+    csv_header = csv.reader(csvfile, delimiter = ',')
     csvreader = csv.DictReader(csvfile)
-    csv_header = next(csvreader)
     #LOOP THRU ROWS
     for row in csvreader:
         mon += 1
-        #TOTAL
+#TOTAL
         total = total + int(row["Profit/Losses"])
-        #AVG
+#AVG
         if fr == 0:
-            fr = float(row["Profit/Losses"])
-       
+            fr = float(row["Profit/Losses"]) 
         rev_c = float(row["Profit/Losses"])- rev_p
-        rev_p = float(row["Profit/Losses"])
-        
+        rev_p = float(row["Profit/Losses"])  
         chg_list = chg_list + [rev_c]
         mon_chg = [mon_chg] + [row["Date"]]
-
-        #GREAT INCREASE
+#GREAT INCREASE
         if rev_c > GI[1]:
             GI[0] = row['Date']
             GI[1] = rev_c     
-        #GREAT DECREASE 
+#GREAT DECREASE 
         if rev_c < GD[1]:
             GD[0] = row['Date']
             GD[1]= rev_c
